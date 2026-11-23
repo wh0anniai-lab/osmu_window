@@ -1,0 +1,58 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+env:
+  PYTHONIOENCODING: utf-8
+  PYTHONUTF8: "1"
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install FFmpeg (macOS, arm64 러너)
+        if: runner.os == 'macOS'
+        run: brew install ffmpeg
+      - name: Install FFmpeg (Windows)
+        if: runner.os == 'Windows'
+        run: choco install ffmpeg -y --no-progress
+      - name: Install Python deps
+        run: python -m pip install -r requirements.txt
+      - name: Install Chromium (HTML 모션 템플릿 렌더)
+        run: python -m playwright install chromium
+      - name: Secret scan (전체 추적 파일)
+        run: python scripts/publish/scan_secrets.py
+      - name: Doctor (도구 점검 — claude 미설치는 허용)
+        run: python scripts/osmu.py doctor || true
+      - name: Unit tests
+        run: python -m unittest discover -s tests -v
+      - name: FFmpeg compose smoke
+        run: python scripts/osmu.py selftest --only ffmpeg_compose
+      - name: Schedule file render
+        run: python scripts/osmu.py schedule render --out output/schedule-render.txt
+      - name: Free path smoke (무료 음성 — 네트워크 문제는 경고만)
+        run: python scripts/osmu.py selftest --only edge_tts
+        continue-on-error: true
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image
+        run: docker build -t osmu-studio:ci .
+      - name: Doctor in container (claude 인증 없음 — 도구 설치만 확인)
+        run: docker run --rm osmu-studio:ci doctor
+      - name: FFmpeg + HTML motion in container
+        run: |
+          docker run --rm osmu-studio:ci selftest --only ffmpeg_compose
+          docker run --rm --entrypoint python osmu-studio:ci -m unittest discover -s tests
