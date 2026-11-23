@@ -328,3 +328,8 @@ docker compose run --rm --entrypoint python osmu scripts/run/daily.py --now
 - Gemini 무료 등급은 분당 한도가 0인 프로젝트가 있습니다. 결제가 켜진 프로젝트의 키를 권장합니다.
 - 예약 실행은 그 시각에 컴퓨터가 켜져 있어야 합니다(잠자기는 깨웁니다).
 - Remotion 엔진(선택)을 켜면 4인 이상 조직은 Remotion Company License 가 필요합니다. 기본 HTML 엔진은 제약이 없습니다.
+
+## 원작 출처
+
+- 원작 GitHub: [jkwon-startup/OSMU_studio](https://github.com/jkwon-startup/OSMU_studio)
+- 해당 프로그램은 원작에서 필요한 부분을 발췌해서 각색한 프로그램입니다.
