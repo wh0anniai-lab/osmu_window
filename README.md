@@ -1,4 +1,4 @@
-# OSMU Studio
+# OSMU Window
 
 [English](README.en.md)
 
@@ -163,7 +163,7 @@ cd osmu_window
 claude
 ```
 
-> **Windows 는 영문 폴더에 받으세요.** `C:\OSMU_studio` 처럼 C 드라이브 바로 아래를 권합니다(`cd C:\` 후 위 명령). 사용자 이름이 한글이어도 동작하지만, 설치 폴더까지 한글 경로 아래에 두면 일부 도구가 문제를 일으킬 수 있습니다.
+> **Windows 는 영문 폴더에 받으세요.** `C:\osmu_window` 처럼 C 드라이브 바로 아래를 권합니다(`cd C:\` 후 위 명령). 사용자 이름이 한글이어도 동작하지만, 설치 폴더까지 한글 경로 아래에 두면 일부 도구가 문제를 일으킬 수 있습니다.
 
 Claude Code가 열리면:
 

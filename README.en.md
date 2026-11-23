@@ -1,4 +1,4 @@
-# OSMU Studio
+# OSMU Window
 
 [한국어](README.md)
 
@@ -55,7 +55,7 @@ cd osmu_window
 claude        # then type /osmu-setup
 ```
 
-> **Windows: clone into an ASCII-only folder** such as `C:\OSMU_studio`. A non-ASCII user name (for example a Korean one) works, but keeping the repository itself outside such a path avoids trouble with some tools.
+> **Windows: clone into an ASCII-only folder** such as `C:\osmu_window`. A non-ASCII user name (for example a Korean one) works, but keeping the repository itself outside such a path avoids trouble with some tools.
 
 `/osmu-setup` asks about your brand, where daily topics live (folder / spreadsheet / plan document), reference accounts, **free vs. paid services**, and notifications. Keys go into `.env` yourself (never into the chat). It then runs a connection test, one full trial run, and registers the daily schedule after you approve the result.
 
